@@ -44,11 +44,17 @@ public class ToDoList implements ActionListener{
 	JFrame frame;
 	JPanel panel;
 	
+	
+	
+	String recent = "";
+	
+	
+	
 	ArrayList<String> list;
 	ToDoList(){
 		frame = new JFrame();
 		panel= new JPanel();
-		String filename= " ";
+		String fileName;
 		button1 = new JButton();
 		button2 = new JButton();
 		button3 = new JButton();
@@ -77,11 +83,37 @@ public class ToDoList implements ActionListener{
 		button5.setText("load list");
 		frame.pack();
 		
+		
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("src/_00_Intro_To_File_Input_and_Output/Recent.txt"));
+			
+			String line5 = br.readLine();
+//			while(line5 != null){
+//				System.out.println(line5);
+//				line5 = br.readLine();
+//				recent = line5;
+				
+//			}
+			recent = line5;
+			System.out.println(recent);
+			br.close();
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
 	}
 	
 	
 	public static void main(String[] args) {
 		ToDoList l = new ToDoList();
+	
 		
 	
 	}
@@ -95,8 +127,20 @@ public class ToDoList implements ActionListener{
 		}
 		
 		if(e.getSource()==button2) {
+			/* String whichFile = "";
 			try {
-				BufferedReader br = new BufferedReader(new FileReader("src/_00_Intro_To_File_Input_and_Output/ToDoList1"));
+				BufferedReader br2 = new BufferedReader(new FileReader(recent));
+				
+				whichFile = br2.readLine();
+			} catch (IOException e3) {
+				// TODO Auto-generated catch block
+				e3.printStackTrace();
+			}
+			*/
+			
+			
+			try {
+				BufferedReader br = new BufferedReader(new FileReader(recent));
 				
 				String line = br.readLine();
 				while(line != null){
@@ -125,7 +169,7 @@ public class ToDoList implements ActionListener{
 			
 			
 			try {
-				FileWriter fw = new FileWriter("src/_00_Intro_To_File_Input_and_Output/ToDoList1");
+				FileWriter fw = new FileWriter(recent);
 				
 				/*
 				NOTE: To append to a file that already exists, add true as a second parameter when calling the
@@ -137,9 +181,9 @@ public class ToDoList implements ActionListener{
 				
 				fw.write("\n"+ list.get(i));
 					
-				fw.close();
-				}
 				
+				}
+				fw.close();
 			} catch (IOException e3) {
 				e3.printStackTrace();
 			}
@@ -149,7 +193,7 @@ public class ToDoList implements ActionListener{
 		}
 		
 		if(e.getSource().equals(button5)) {
-			
+			String fileName = "";
 			JFileChooser jfc = new JFileChooser();
 			int returnVal = jfc.showOpenDialog(null);
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -157,7 +201,33 @@ public class ToDoList implements ActionListener{
 				
 			}
 			
-		
+			try {
+				BufferedReader br = new BufferedReader(new FileReader(fileName));
+				ArrayList<String> listdos = new ArrayList<String>();
+				String line2 = br.readLine();
+				while(line2 != null){
+					System.out.println(line2);
+					line2 = br.readLine();
+					listdos.add(line2);
+				}
+				
+				br.close();
+				
+				list = listdos;
+				
+				
+				
+				
+				
+				
+				
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e5) {
+				// TODO Auto-generated catch block
+				e5.printStackTrace();
+			}
 			
 		}
 		

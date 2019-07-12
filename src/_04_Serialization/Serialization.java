@@ -26,7 +26,8 @@ public class Serialization {
 		int age = 32;
 
 		// Construct a SaveData object and save it to a file
-		save(new SaveData(name, age));
+		SaveData save2 = new SaveData(name,age);
+		save(save2);
 
 		// Load the SaveData object from the file
 		SaveData loadedData = load();
